@@ -1,6 +1,7 @@
-package repository
+package io.github.andspaulino.repository
 
-import model.User
+import io.github.andspaulino.model.User
+
 
 interface UserRepository {
     suspend fun create(user: User): Int
