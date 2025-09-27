@@ -1,4 +1,4 @@
-package io.github.andspaulino.plugins
+package io.github.andspaulino.infrastructure.plugins
 
 import io.ktor.server.application.Application
 import io.ktor.server.response.respondText
