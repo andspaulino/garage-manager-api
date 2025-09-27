@@ -22,8 +22,9 @@ dependencies {
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.server.host.common)
 
-    // Dependency Injection
-    implementation(libs.ktor.server.di)
+    // Koin DI
+    implementation("io.insert-koin:koin-ktor:3.5.6")
+    implementation("io.insert-koin:koin-logger-slf4j:3.5.6")
 
     // Logging
     implementation(libs.logback.classic)
