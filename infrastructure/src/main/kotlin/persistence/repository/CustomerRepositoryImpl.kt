@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 
 class CustomerRepositoryImpl : CustomerRepository {
 
-    override suspend fun create(customer: Customer): Int = dbQuery {
+    override suspend fun create(customer: Customer): Long = dbQuery {
         CustomerEntity.insert {
             it[name] = customer.name
             it[documentType] = customer.documentType
@@ -24,7 +24,7 @@ class CustomerRepositoryImpl : CustomerRepository {
         }[CustomerEntity.id]
     }
 
-    override suspend fun findById(id: Int): Customer? = dbQuery {
+    override suspend fun findById(id: Long): Customer? = dbQuery {
         CustomerEntity.selectAll()
             .where { CustomerEntity.id eq id }
             .singleOrNull()
@@ -97,7 +97,7 @@ class CustomerRepositoryImpl : CustomerRepository {
             }
     }
 
-    override suspend fun update(id: Int, customer: Customer): Boolean = dbQuery {
+    override suspend fun update(id: Long, customer: Customer): Boolean = dbQuery {
         CustomerEntity.update({ CustomerEntity.id eq id }) {
             it[name] = customer.name
             it[documentType] = customer.documentType
@@ -108,18 +108,18 @@ class CustomerRepositoryImpl : CustomerRepository {
         } > 0
     }
 
-    override suspend fun delete(id: Int): Boolean = dbQuery {
+    override suspend fun delete(id: Long): Boolean = dbQuery {
         CustomerEntity.deleteWhere { CustomerEntity.id eq id } > 0
     }
 
-    override suspend fun softDelete(id: Int): Boolean = dbQuery {
+    override suspend fun softDelete(id: Long): Boolean = dbQuery {
         CustomerEntity.update({ CustomerEntity.id eq id }) {
             it[deletedAt] = LocalDateTime.now()
             it[updatedAt] = LocalDateTime.now()
         } > 0
     }
 
-    override suspend fun restore(id: Int): Boolean = dbQuery {
+    override suspend fun restore(id: Long): Boolean = dbQuery {
         CustomerEntity.update({ CustomerEntity.id eq id }) {
             it[deletedAt] = null
             it[updatedAt] = LocalDateTime.now()

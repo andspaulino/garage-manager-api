@@ -15,7 +15,7 @@ import java.time.LocalDateTime
 
 class UserRepositoryImpl : UserRepository {
 
-    override suspend fun create(user: User): Int = dbQuery {
+    override suspend fun create(user: User): Long = dbQuery {
         UserEntity.insert {
             it[UserEntity.username] = user.username
             it[UserEntity.password] = user.password
@@ -24,7 +24,7 @@ class UserRepositoryImpl : UserRepository {
         }[UserEntity.id]
     }
 
-    override suspend fun findById(id: Int): User? = dbQuery {
+    override suspend fun findById(id: Long): User? = dbQuery {
         UserEntity.selectAll()
             .where { UserEntity.id eq id }
             .map {
@@ -77,7 +77,7 @@ class UserRepositoryImpl : UserRepository {
             }
     }
 
-    override suspend fun update(id: Int, user: User): Boolean = dbQuery {
+    override suspend fun update(id: Long, user: User): Boolean = dbQuery {
         UserEntity.update({ UserEntity.id eq id }) {
             it[UserEntity.username] = user.username
             it[UserEntity.password] = user.password
@@ -87,11 +87,11 @@ class UserRepositoryImpl : UserRepository {
         } > 0
     }
 
-    override suspend fun delete(id: Int): Boolean = dbQuery {
+    override suspend fun delete(id: Long): Boolean = dbQuery {
         UserEntity.deleteWhere { UserEntity.id eq id } > 0
     }
 
-    override suspend fun softDelete(id: Int): Boolean = dbQuery {
+    override suspend fun softDelete(id: Long): Boolean = dbQuery {
         UserEntity.update({ UserEntity.id eq id }) {
             it[UserEntity.deletedAt] = LocalDateTime.now()
             it[UserEntity.isActive] = false
@@ -116,7 +116,7 @@ class UserRepositoryImpl : UserRepository {
             }
     }
 
-    override suspend fun restore(id: Int): Boolean = dbQuery {
+    override suspend fun restore(id: Long): Boolean = dbQuery {
         UserEntity.update({ UserEntity.id eq id }) {
             it[UserEntity.deletedAt] = null
             it[UserEntity.isActive] = true

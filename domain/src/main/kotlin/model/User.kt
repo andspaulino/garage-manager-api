@@ -4,7 +4,7 @@ import enums.UserRole
 import java.time.LocalDateTime
 
 data class User(
-    val id: Int? = null,
+    val id: Long? = null,
     val username: String,
     val password: String,
     val role: UserRole,

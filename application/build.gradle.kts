@@ -1,4 +1,8 @@
 
+plugins {
+    alias(libs.plugins.kotlin.plugin.serialization)
+}
+
 dependencies {
     // Module dependencies
     implementation(project(":domain"))

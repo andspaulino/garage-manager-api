@@ -4,7 +4,7 @@ import enums.DocumentType
 import java.time.LocalDateTime
 
 data class Customer(
-    val id: Int? = null,
+    val id: Long? = null,
     val name: String,
     val documentType: DocumentType,
     val document: String,

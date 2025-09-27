@@ -21,5 +21,5 @@ fun Customer.toCustomerResponse(): CustomerResponse =
         document = document,
         phone = phone,
         email = email,
-        createdAt = createdAt
+        createdAt = createdAt.toString()
     )

@@ -2,20 +2,22 @@ package routes
 
 import application.dto.CreateCustomerRequest
 import application.usecase.CreateCustomerUseCase
-import application.usecase.FindCustomerUseCase
+import application.usecase.FindCustomerByIdUseCase
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 
 fun Route.customerRoutes(
     createCustomerUseCase: CreateCustomerUseCase,
-    findCustomerUseCase: FindCustomerUseCase
+    findCustomerByIdUseCase: FindCustomerByIdUseCase
 ) {
     route("/customers") {
         create(createCustomerUseCase)
+        findById(findCustomerByIdUseCase)
     }
 }
 
@@ -38,16 +40,21 @@ private fun Route.create(createCustomerUseCase: CreateCustomerUseCase) {
     }
 }
 
-//privatee fun Route.findById(findCustomerUseCase: FindCustomerUseCase) {
-//    get {
-//        try {
-//            val users = findAllUsersUseCase
-//            call.respond(HttpStatusCode.OK, users)
-//        } catch (e: Exception) {
-//            call.respond(
-//                HttpStatusCode.InternalServerError,
-//                mapOf("error" to "Failed to fetch users: ${e.message}")
-//            )
-//        }
-//    }
-//}
+private fun Route.findById(findCustomerByIdUseCase: FindCustomerByIdUseCase) {
+    get("{id}") {
+        call.parameters["id"]?.let { id ->
+            findCustomerByIdUseCase(id.toLong()).fold(
+                onSuccess = { customerResponse ->
+                    call.respond(HttpStatusCode.OK, customerResponse)
+                },
+                onFailure = { throwable ->
+                    val status = when (throwable) {
+                        is IllegalStateException -> HttpStatusCode.BadRequest
+                        else -> HttpStatusCode.InternalServerError
+                    }
+                    call.respond(status, mapOf("error" to (throwable.message ?: "Unknown error")))
+                }
+            )
+        } ?: call.respond(HttpStatusCode.BadRequest)
+    }
+}

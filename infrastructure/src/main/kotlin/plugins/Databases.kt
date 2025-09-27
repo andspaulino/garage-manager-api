@@ -6,6 +6,7 @@ import org.jetbrains.exposed.sql.DatabaseConfig
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.transactions.transaction
+import persistence.entity.CustomerEntity
 import persistence.entity.UserEntity
 
 fun Application.configureDatabases() {
@@ -21,6 +22,6 @@ fun Application.configureDatabases() {
     )
 
     transaction(database) {
-        SchemaUtils.create(UserEntity)
+        SchemaUtils.create(UserEntity, CustomerEntity)
     }
 }
