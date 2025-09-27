@@ -1,12 +1,12 @@
-package io.github.andspaulino.plugins
+package plugins
 
-import io.github.andspaulino.persistence.entity.UserEntity
 import io.ktor.server.application.Application
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.DatabaseConfig
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.transactions.transaction
+import persistence.entity.UserEntity
 
 fun Application.configureDatabases() {
     val database = Database.connect(

@@ -1,6 +1,6 @@
-package io.github.andspaulino.repository
+package repository
 
-import io.github.andspaulino.model.User
+import model.User
 
 
 interface UserRepository {

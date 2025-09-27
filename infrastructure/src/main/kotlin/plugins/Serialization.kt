@@ -1,4 +1,4 @@
-package io.github.andspaulino.plugins
+package plugins
 
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application

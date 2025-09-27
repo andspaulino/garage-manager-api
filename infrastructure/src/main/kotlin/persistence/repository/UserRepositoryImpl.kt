@@ -1,6 +1,5 @@
-package io.github.andspaulino.persistence.repository
+package persistence.repository
 
-import io.github.andspaulino.persistence.entity.UserEntity
 import kotlinx.coroutines.Dispatchers
 import model.User
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -10,6 +9,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.update
+import persistence.entity.UserEntity
 import repository.UserRepository
 import java.time.LocalDateTime
 

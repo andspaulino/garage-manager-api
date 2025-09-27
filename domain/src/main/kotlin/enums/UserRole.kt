@@ -1,4 +1,4 @@
-package io.github.andspaulino.enums
+package enums
 
 enum class UserRole {
     ADMIN, EMPLOYEE

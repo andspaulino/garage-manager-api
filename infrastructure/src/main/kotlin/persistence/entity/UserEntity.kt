@@ -1,4 +1,4 @@
-package io.github.andspaulino.persistence.entity
+package persistence.entity
 
 import enums.UserRole
 import org.jetbrains.exposed.sql.Table

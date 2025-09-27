@@ -1,6 +1,6 @@
-package io.github.andspaulino.model
+package model
 
-import io.gi.UserRole
+import enums.UserRole
 import java.time.LocalDateTime
 
 data class User(
