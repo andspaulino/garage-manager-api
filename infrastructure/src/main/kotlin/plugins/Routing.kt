@@ -1,16 +1,21 @@
 package plugins
 
+import application.usecase.CreateCustomerUseCase
 import application.usecase.FindAllUsersUseCase
+import application.usecase.FindCustomerUseCase
 import io.ktor.server.application.Application
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
+import routes.customerRoutes
 import routes.userRoutes
 
 fun Application.configureRouting() {
 
     val findAllUsersUseCase by inject<FindAllUsersUseCase>()
+    val createCustomerUseCase by inject<CreateCustomerUseCase>()
+    val findCustomerUseCase by inject<FindCustomerUseCase>()
 
     routing {
         get("/") {
@@ -19,6 +24,11 @@ fun Application.configureRouting() {
         
         userRoutes(
             findAllUsersUseCase = findAllUsersUseCase
+        )
+
+        customerRoutes(
+            createCustomerUseCase = createCustomerUseCase,
+            findCustomerUseCase = findCustomerUseCase
         )
     }
 }

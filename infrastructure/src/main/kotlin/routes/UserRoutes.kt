@@ -18,7 +18,7 @@ fun Route.userRoutes(
 private fun Route.findAll(findAllUsersUseCase: FindAllUsersUseCase) {
     get {
         try {
-            val users = findAllUsersUseCase.execute()
+            val users = findAllUsersUseCase()
             call.respond(HttpStatusCode.OK, users)
         } catch (e: Exception) {
             call.respond(
