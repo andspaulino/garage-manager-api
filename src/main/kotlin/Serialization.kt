@@ -10,13 +10,16 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
 import org.slf4j.event.*
 
 fun Application.configureSerialization() {
-    routing {
-        get("/json/kotlinx-serialization") {
-            call.respond(mapOf("hello" to "world"))
-        }
+    install(ContentNegotiation) {
+        json(json = Json {
+            prettyPrint = true
+            isLenient = true
+            ignoreUnknownKeys = true
+        })
     }
 }

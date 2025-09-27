@@ -14,7 +14,4 @@ import org.jetbrains.exposed.sql.*
 import org.slf4j.event.*
 
 fun Application.configureFrameworks() {
-    dependencies {
-        provide { GreetingService { "Hello, World!" } }
-    }
 }
