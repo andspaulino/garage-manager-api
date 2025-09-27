@@ -1,9 +1,7 @@
-package io.github.andspaulino.infrastructure.persistence.repository
+package persistence.repository
 
-import io.github.andspaulino.domain.model.User
-import io.github.andspaulino.domain.repository.UserRepository
-import io.github.andspaulino.infrastructure.persistence.entity.UserEntity
 import kotlinx.coroutines.Dispatchers
+import model.User
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
@@ -11,6 +9,8 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.update
+import persistence.entity.UserEntity
+import repository.UserRepository
 import java.time.LocalDateTime
 
 class UserRepositoryImpl : UserRepository {
