@@ -10,10 +10,10 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 fun Application.configureDatabases() {
     val database = Database.connect(
-        url = "jdbc:postgresql://localhost:5432/garage-manager-api",
-        driver = "org.postgresql.Driver",
-        user = "postgres",
-        password = "postgres",
+        url = environment.config.property("database.url").getString(),
+        user = environment.config.property("database.username").getString(),
+        password = environment.config.property("database.password").getString(),
+        driver = environment.config.property("database.driver").getString(),
         databaseConfig = DatabaseConfig {
             sqlLogger = StdOutSqlLogger
             useNestedTransactions = true
